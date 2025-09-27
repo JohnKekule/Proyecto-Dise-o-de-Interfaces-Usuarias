@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mejor Aula para Alumnos - Plataforma educativa digital optimizada para estudiantes">
+    <meta name="keywords" content="educación, estudiantes, aula virtual, interfaz usuario, DIU">
+    <title>Mejor Aula para Alumnos | Plataforma Educativa</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <style>
+        /* Variables CSS para mantener consistencia */
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #7b68ee;
+            --accent-color: #50c878;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --background-light: #f8f9fa;
+            --background-white: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header__subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Sección principal */
+        .main-section {
+            padding: 3rem 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Tarjetas de características */
+        .feature-card {
+            background: var(--background-white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card__icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card__title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card__description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: var(--background-white);
+            padding: 3rem 0;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .cta-section__title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .cta-section__description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .btn--secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            margin-left: 1rem;
+        }
+
+        .btn--secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer__links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer__link {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer__link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header__title {
+                font-size: 2rem;
+            }
+
+            .header__subtitle {
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer__content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer__links {
+                justify-content: center;
+            }
+
+            .btn--secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Accesibilidad */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus states para accesibilidad */
+        .btn:focus,
+        .footer__link:focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <h1 class="header__title">Mejor Aula para Alumnos</h1>
+            <p class="header__subtitle">Transformando la experiencia educativa digital</p>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-section" role="main">
+        <div class="container">
+            <!-- Características principales -->
+            <section class="features" aria-labelledby="features-title">
+                <h2 id="features-title" class="sr-only">Características principales</h2>
+                
+                <article class="feature-card">
+                    <span class="feature-card__icon" role="img" aria-label="Interfaz intuitiva">🎯</span>
+                    <h3 class="feature-card__title">Interfaz Intuitiva</h3>
+                    <p class="feature-card__description">
+                        Diseño centrado en el usuario que facilita la navegación y mejora la experiencia de aprendizaje para todos los estudiantes.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <span class="feature-card__icon" role="img" aria-label="Diseño responsive">📱</span>
+                    <h3 class="feature-card__title">Totalmente Responsive</h3>
+                    <p class="feature-card__description">
+                        Accede desde cualquier dispositivo - computadora, tablet o móvil. La plataforma se adapta perfectamente a tu pantalla.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <span class="feature-card__icon" role="img" aria-label="Accesibilidad universal">♿</span>
+                    <h3 class="feature-card__title">Accesibilidad Universal</h3>
+                    <p class="feature-card__description">
+                        Cumple con estándares WCAG 2.1 para garantizar que todos los estudiantes puedan acceder al contenido educativo.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <span class="feature-card__icon" role="img" aria-label="Rendimiento optimizado">⚡</span>
+                    <h3 class="feature-card__title">Alto Rendimiento</h3>
+                    <p class="feature-card__description">
+                        Carga rápida y navegación fluida para que puedas concentrarte en lo que realmente importa: aprender.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <span class="feature-card__icon" role="img" aria-label="Experiencia personalizada">🎨</span>
+                    <h3 class="feature-card__title">Experiencia Personalizada</h3>
+                    <p class="feature-card__description">
+                        Sistema de diseño coherente que se adapta a las necesidades específicas de cada estudiante y contexto educativo.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <span class="feature-card__icon" role="img" aria-label="Colaboración activa">🤝</span>
+                    <h3 class="feature-card__title">Colaboración Activa</h3>
+                    <p class="feature-card__description">
+                        Herramientas integradas para facilitar la comunicación y colaboración entre estudiantes y profesores.
+                    </p>
+                </article>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="cta-section" role="region" aria-labelledby="cta-title">
+                <h2 id="cta-title" class="cta-section__title">¿Listo para mejorar tu experiencia educativa?</h2>
+                <p class="cta-section__description">
+                    Únete a miles de estudiantes que ya están disfrutando de una mejor experiencia de aprendizaje digital.
+                </p>
+                <a href="#" class="btn" role="button" aria-describedby="cta-description">
+                    Comenzar Ahora
+                </a>
+                <a href="#" class="btn btn--secondary" role="button">
+                    Ver Demo
+                </a>
+                <p id="cta-description" class="sr-only">Botón para comenzar a usar la plataforma educativa</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2024 Mejor Aula para Alumnos. Proyecto DIU.</p>
+                <nav class="footer__links" role="navigation" aria-label="Enlaces del pie de página">
+                    <a href="#" class="footer__link">Sobre el Proyecto</a>
+                    <a href="#" class="footer__link">Documentación</a>
+                    <a href="#" class="footer__link">Contribuir</a>
+                    <a href="#" class="footer__link">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Screen reader only styles -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+
+    <!-- JavaScript para mejorar la interactividad -->
+    <script>
+        // Función para mejorar la accesibilidad del teclado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Agregar eventos de teclado para los botones
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+
+            // Anunciar cambios importantes para lectores de pantalla
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.setAttribute('aria-expanded', 'true');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Implementar navegación por teclado mejorada
+            document.addEventListener('keydown', function(e) {
+                if (e.altKey && e.key === 'h') {
+                    // Alt + H para ir al header
+                    document.querySelector('.header').focus();
+                    e.preventDefault();
+                }
+                if (e.altKey && e.key === 'm') {
+                    // Alt + M para ir al main content
+                    document.querySelector('main').focus();
+                    e.preventDefault();
+                }
+            });
+
+            console.log('✅ Mejor Aula para Alumnos - Prototipo cargado correctamente');
+            console.log('🎯 Proyecto DIU - Diseño de Interfaces de Usuario');
+        });
+    </script>
+</body>
+</html>
