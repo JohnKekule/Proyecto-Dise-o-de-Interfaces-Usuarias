@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curso: Diseño de Interfaces — Aula (Prototipo actualizado)</title>
+  <style>
+    :root {
+      --bg: #0b0f14; --panel: #111827; --panel-2: #0f172a; --text: #e5e7eb; --muted: #9ca3af;
+      --accent: #22d3ee; --accent-2: #a78bfa; --ok: #34d399; --warn: #f59e0b; --danger: #ef4444; --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;background:var(--bg);color:var(--text)}
+    a{color:var(--accent);text-decoration:none}
+    a:focus{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(0deg,var(--panel-2),#0b0f14 60%);border-bottom:1px solid #1f2937}
+    .wrap{max-width:1200px;margin:0 auto;padding:16px}
+    .topbar{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+    .course-title{font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;letter-spacing:.2px}
+    .search{display:flex;align-items:center;gap:8px;background:#0b1220;border:1px solid #263247;border-radius:999px;padding:8px 12px}
+    .search input{background:transparent;border:none;color:var(--text);width:200px}
+
+    .grid{display:grid;grid-template-columns:1.2fr 2fr;gap:16px}
+    .stack{display:grid;gap:12px}
+
+    .card{background:var(--panel);border:1px solid #1f2937;border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .card h2,.card h3{margin:0 0 8px;font-size:1rem}
+    .muted{color:var(--muted);font-size:.9rem}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;border:1px solid #334155;background:#0b1220;font-size:.8rem}
+    .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+    .actions{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .action{display:flex;gap:10px;align-items:center;justify-content:center;padding:12px;border-radius:14px;border:1px solid #263247;background:#0b1220;font-weight:600}
+    .badge{font-size:.8rem;padding:2px 8px;border:1px solid #334155;border-radius:999px}
+
+    .deadline{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px;border-radius:12px;border:1px solid #263247;background:#0b1220}
+    .deadline .date{font-weight:700;font-variant-numeric:tabular-nums}
+    .status.ok{color:var(--ok)} .status.warn{color:var(--warn)} .status.danger{color:var(--danger)}
+
+    details.module{border:1px solid #243045;background:#0b1220;border-radius:14px;padding:0}
+    details.module+details.module{margin-top:10px}
+    details.module summary{list-style:none;cursor:pointer;padding:14px 16px;font-weight:700}
+    details.module[open] summary{border-bottom:1px solid #243045}
+    .items{display:grid;gap:10px;padding:12px}
+    .item{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid #243045;border-radius:12px;padding:10px;background:var(--panel)}
+    .item .type{font-size:.75rem;padding:2px 8px;border:1px solid #334155;border-radius:999px;opacity:.9}
+    .item .meta{font-size:.85rem;color:var(--muted)}
+
+    .block-list{display:grid;gap:8px}
+    .block{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:12px;border:1px solid #263247;background:#0b1220}
+
+    /* Pendientes */
+    #pendientes .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    #pendientes .filter{padding:6px 10px;border:1px solid #334155;border-radius:999px;background:#0b1220}
+
+    footer{margin-top:32px;padding:24px 0 60px;color:var(--muted);border-top:1px solid #1f2937}
+    @media(max-width:960px){.grid{grid-template-columns:1fr}.actions{grid-template-columns:repeat(3,1fr)}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar" role="navigation" aria-label="Barra superior del curso">
+      <div class="course-title">DIU-2025 · Diseño de Interfaces · Sección A</div>
+      <label class="search" aria-label="Buscar en el curso">
+        🔎 <input type="search" placeholder="Buscar: tarea, archivo, foro…" aria-label="Buscar" />
+      </label>
+    </div>
+  </header>
+
+  <main class="wrap" id="contenido-principal">
+    <div class="grid" aria-describedby="intro">
+      <!-- Columna izquierda: visión general y acciones rápidas -->
+      <section class="stack" aria-label="Resumen del curso">
+        <div class="card" id="intro">
+          <h2>Resumen rápido</h2>
+          <p class="muted">Aquí encuentras lo esencial: próximos vencimientos, anuncios y atajos a las acciones más usadas.</p>
+          <div class="row actions" role="list" aria-label="Acciones rápidas">
+            <a class="action" href="#anuncios" role="listitem">Anuncios</a>
+            <a class="action" href="#modulos" role="listitem">Módulos</a>
+            <a class="action" href="#pendientes" role="listitem">Tareas pendientes <span class="badge">3</span></a>
+            <a class="action" href="#calificaciones" role="listitem">Notas</a>
+            <a class="action" href="#foros" role="listitem">Foros</a>
+          </div>
+        </div>
+
+        <div class="card" aria-label="Próximos vencimientos">
+          <h2>Próximos vencimientos</h2>
+          <div class="stack">
+            <div class="deadline" role="listitem">
+              <div class="date">Lun 29 Sep · 23:59</div>
+              <div>
+                <div><strong>Tarea 1:</strong> Heurísticas de Nielsen</div>
+                <div class="muted">Entrega individual · 15%</div>
+              </div>
+              <div class="status warn">Faltan 2 días</div>
+            </div>
+            <div class="deadline" role="listitem">
+              <div class="date">Mié 01 Oct · 12:00</div>
+              <div>
+                <div><strong>Cuestionario:</strong> Principios DIU</div>
+                <div class="muted">10 preguntas · intento único</div>
+              </div>
+              <div class="status warn">Faltan 3 días</div>
+            </div>
+            <div class="deadline" role="listitem">
+              <div class="date">Vie 03 Oct · 18:00</div>
+              <div>
+                <div><strong>Foro:</strong> Crítica de prototipos</div>
+                <div class="muted">Participación mínima 2 posts</div>
+              </div>
+              <div class="status ok">Faltan 5 días</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="anuncios" aria-label="Anuncios y novedades">
+          <h2>Anuncios</h2>
+          <div class="block-list" role="list">
+            <div class="block" role="listitem">
+              📢 <div><strong>Clase de hoy</strong><div class="muted">Slides y archivo de práctica subidos al Módulo 3.</div></div>
+            </div>
+            <div class="block" role="listitem">
+              📢 <div><strong>Rúbrica actualizada</strong><div class="muted">Revisar criterios del proyecto final en Archivos del curso.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="modulos" aria-label="Módulos semanales">
+          <h2>Módulos del curso</h2>
+          <details class="module" open>
+            <summary>Semana 3 · Investigación con usuarios</summary>
+            <div class="items">
+              <div class="item" role="article" aria-label="Archivo PDF">
+                <span class="type">Archivo</span>
+                <div>
+                  <div><a href="#">Guía de entrevistas (PDF)</a></div>
+                  <div class="meta">Subido: 22 Sep · 1.2 MB</div>
+                </div>
+                <div class="progress done" aria-label="Completado">✓</div>
+              </div>
+              <div class="item" role="article" aria-label="Tarea de entrega">
+                <span class="type">Tarea</span>
+                <div>
+                  <div><a href="#tarea">Entrega: 3 hallazgos clave</a></div>
+                  <div class="meta">Vence 29 Sep · Requiere PDF + enlace</div>
+                </div>
+                <div class="progress">25%</div>
+              </div>
+              <div class="item" role="article" aria-label="Tarea breve">
+                <span class="type">Tarea</span>
+                <div>
+                  <div><a href="#tarea">Reflexión breve de entrevista</a></div>
+                  <div class="meta">Vence 01 Oct · 5 preguntas</div>
+                </div>
+                <div class="progress">—</div>
+              </div>
+              <div class="item" role="article" aria-label="Foro de discusión">
+                <span class="type">Foro</span>
+                <div>
+                  <div><a href="#foro">Discusión: sesgos y ética</a></div>
+                  <div class="meta">Mínimo 2 aportes · Citar fuente</div>
+                </div>
+                <div class="progress">0%</div>
+              </div>
+            </div>
+          </details>
+          <details class="module">
+            <summary>Semana 4 · Prototipado de baja fidelidad</summary>
+            <div class="items">
+              <div class="item">
+                <span class="type">Archivo</span>
+                <div>
+                  <div><a href="#">Plantillas de wireframes</a></div>
+                  <div class="meta">Figma + PDF</div>
+                </div>
+                <div class="progress">—</div>
+              </div>
+              <div class="item">
+                <span class="type">Encuesta</span>
+                <div>
+                  <div><a href="#">Autoevaluación sprint</a></div>
+                  <div class="meta">5 min · anónima</div>
+                </div>
+                <div class="progress">—</div>
+              </div>
+              <div class="item">
+                <span class="type">Tarea</span>
+                <div>
+                  <div><a href="#tarea">Sube tu prototipo de papel</a></div>
+                  <div class="meta">Vence 06 Oct</div>
+                </div>
+                <div class="progress">—</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Columna derecha: progreso y recursos (solo en portada/módulos) -->
+      <aside class="stack" aria-label="Progreso y recursos">
+        <div class="card" id="progreso">
+          <h2>Tu progreso</h2>
+          <div class="row">
+            <span class="pill">✅ 3/12 completados</span>
+            <span class="pill">📈 Promedio: 5.4</span>
+            <span class="pill">⏱️ 4–6h/semana</span>
+          </div>
+        </div>
+        <div class="card" id="recursos">
+          <h2>Recursos del curso</h2>
+          <div class="block-list">
+            <a class="block" href="#">
+              📂 <div><strong>Archivos</strong><div class="muted">Rúbricas, guías, bibliografía</div></div>
+            </a>
+            <a class="block" href="#">
+              🗓️ <div><strong>Calendario</strong><div class="muted">Clases y eventos</div></div>
+            </a>
+            <a class="block" href="#">
+              🧑‍🤝‍🧑 <div><strong>Participantes</strong><div class="muted">Docentes y compañeros</div></div>
+            </a>
+            <a class="block" href="#">
+              ✉️ <div><strong>Mensajería</strong><div class="muted">Contactar ayudantes</div></div>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- NUEVA VISTA: Tareas pendientes -->
+    <section id="pendientes" class="stack" aria-label="Tareas pendientes" style="margin-top:40px">
+      <div class="card">
+        <h2>Tareas pendientes</h2>
+        <p class="muted">Atajos a todas tus entregas y actividades con fecha.</p>
+        <div class="row" style="gap:8px;flex-wrap:wrap">
+          <span class="pill">Todas</span>
+          <span class="pill">Esta semana</span>
+          <span class="pill">Vencen pronto</span>
+          <span class="pill">Foros</span>
+          <span class="pill">Encuestas</span>
+        </div>
+        <div class="stack" style="margin-top:10px">
+          <div class="deadline"><div class="date">29 Sep · 23:59</div><div><strong>Tarea 1:</strong> Heurísticas de Nielsen</div><div><a class="action" href="#tarea">Ir a entregar</a></div></div>
+          <div class="deadline"><div class="date">01 Oct · 12:00</div><div><strong>Cuestionario:</strong> Principios de DIU</div><div><a class="action" href="#">Ir al cuestionario</a></div></div>
+          <div class="deadline"><div class="date">03 Oct · 18:00</div><div><strong>Foro:</strong> Crítica de prototipos</div><div><a class="action" href="#foro">Abrir foro</a></div></div>
+          <div class="deadline"><div class="date">06 Oct · 23:59</div><div><strong>Tarea:</strong> Prototipo de papel</div><div><a class="action" href="#tarea">Ir a entregar</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA: Entrega de tarea -->
+    <section id="tarea" class="stack" aria-label="Entregar Tarea" style="margin-top:40px">
+      <div class="card">
+        <h2>Tarea 1 — Heurísticas de Nielsen</h2>
+        <p class="muted">Entrega individual · PDF + enlace a prototipo · Rubrica en Archivos</p>
+        <ul class="muted"><li>Fecha límite: Lun 29 Sep 23:59</li><li>Intentos permitidos: 1</li></ul>
+        <div class="stack">
+          <label>Subir archivo (PDF)
+            <input type="file" aria-label="Subir PDF" />
+          </label>
+          <label>Enlace al prototipo
+            <input type="url" placeholder="https://…" style="width:100%;max-width:520px" />
+          </label>
+          <button class="action" style="width:max-content">Enviar intento</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA: Foro -->
+    <section id="foro" class="stack" aria-label="Foro" style="margin-top:40px">
+      <div class="card">
+        <h2>Foro: Crítica de prototipos</h2>
+        <article class="stack">
+          <div class="item" style="grid-template-columns:1fr"><div><strong>Ana</strong> — "El panel de vencimientos me ayudó a ubicar la tarea rápido." <div class="muted">hace 2 h</div></div></div>
+          <div class="item" style="grid-template-columns:1fr"><div><strong>Diego</strong> — "Sumaría un filtro por semana en móvil." <div class="muted">hace 30 min</div></div></div>
+          <textarea rows="4" placeholder="Escribe tu aporte…" aria-label="Caja de respuesta" style="width:100%;background:#0b1220;border:1px solid #243045;color:var(--text);border-radius:10px;padding:10px"></textarea>
+          <div>
+            <button class="action" style="width:max-content">Publicar</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <small>Prototipo UI pensado para Aula (Moodle). Solo usa objetos nativos: archivos, tareas, foros, encuestas, calendario y progreso. Accesible (teclado, contraste AA) y responsive.</small>
+    </div>
+  </footer>
+</body>
+</html>
